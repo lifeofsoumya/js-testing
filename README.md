@@ -3,3 +3,6 @@
     - set npm run test = only `jest` command 
     - Any file ending with test.ts or spec.ts would be ran by jest
 3. Time to use `supertest` package which does kind of replace the actual api calls like axios.get(endpoint)
+4. expect() and toBe() are used - self explanatory functions
+
+5. Testing get endpoints where parameters are received via headers and sent manually from test script
