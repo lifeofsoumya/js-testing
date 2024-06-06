@@ -1,5 +1,6 @@
 import express, { Request, Response, NextFunction } from "express";
 import { z } from "zod"
+import { prismaClient } from "./db";
 
 export const app = express();
 app.use(express.json());
@@ -9,7 +10,7 @@ const mathInput = z.object({
     b: z.number()
 })
 
-app.post("/sum", (req: Request, res: Response) => {
+app.post("/sum", async (req: Request, res: Response) => {
     const zodSanity = mathInput.safeParse(req.body);
 
     if(!zodSanity.success){
@@ -19,6 +20,15 @@ app.post("/sum", (req: Request, res: Response) => {
     }
 
     const sum = zodSanity.data.a + zodSanity.data.b;
+
+    // assuming I had a db call to make with this data, it'll just do a mock call in spec.ts
+    await prismaClient.sum.create({
+        data: {
+            a: zodSanity.data.a,
+            b: zodSanity.data.b,
+            result: sum
+        }
+    })
 
     res.json({answer: sum})
 });

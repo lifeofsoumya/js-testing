@@ -1,6 +1,10 @@
-import { describe, expect, it, test } from 'vitest'
+import { describe, expect, it, test, vi } from 'vitest'
 import request from 'supertest';
 import { app } from '../index';
+
+vi.mock("../db", ()=> ({ // ..db bcoz, it tells which prismaClient to mock
+    prismaClient: { sum: { create: vi.fn() }} // this mocking means, whenever prismaClient.sum.create would be called, it would reach this vi.fn() fnction, which is empty function
+}))
 
 describe("Does Math checking", ()=> {
     it("should return sum of QS.1", async ()=> {
