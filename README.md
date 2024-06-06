@@ -6,3 +6,5 @@
 4. expect() and toBe() are used - self explanatory functions
 
 5. Testing get endpoints where parameters are received via headers and sent manually from test script
+
+6. Moving from 'jest' to 'vitest', import the same functions from 'vitest' and run vitest command in npm run test
