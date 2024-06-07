@@ -2,9 +2,15 @@ import { describe, expect, it, test, vi } from 'vitest'
 import request from 'supertest';
 import { app } from '../index';
 
-vi.mock("../db", ()=> ({ // ..db bcoz, it tells which prismaClient to mock
-    prismaClient: { sum: { create: vi.fn() }} // this mocking means, whenever prismaClient.sum.create would be called, it would reach this vi.fn() fnction, which is empty function
-}))
+// vi.mock("../db", ()=> ({ // ..db bcoz, it tells which prismaClient to mock
+//     prismaClient: { sum: { create: vi.fn() }} // this mocking means, whenever prismaClient.sum.create would be called, it would reach this vi.fn() fnction, which is empty function
+// }))
+
+// we know as we are calling prisma.sum.create thus we can manually mock it.
+// but what if we're calling sum.findOne or findMany and many more functions, 
+// we should find a generic way that mocks all the functions in the 'sum' Schema
+
+vi.mock("../db"); // it'll pick mocked db from /__mocks__/db.ts
 
 describe("Does Math checking", ()=> {
     it("should return sum of QS.1", async ()=> {
