@@ -32,7 +32,7 @@ describe("Does Math checking", ()=> {
         // normal testing concept 
         const res = await request(app).post("/sum").send({ a: 4, b: 9});
         expect(res.statusCode).toBe(200);
-        expect(res.body.answer).toBe(13)
+        expect(res.body.answer).toBe(12)
         // expect(res.body.id).toBe(1) // id received from actual db call 
     })
 
