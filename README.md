@@ -18,4 +18,11 @@
 
 - Mocking is done on the basis of assumption that db would do it's tasks succesfully and I'm liable for other unit's testing
 
-## Unit testing completed -> Moving to integration and e2e tests
+## Unit testing completed -> Moving to integration test
+
+1. Here we need to start a real service like db, kafka or redis whatever business logic needs
+2. Thus let's create a docker-compose which starts a pg container
+3. To check if our pg container(DB) is ready or not, there's a popular script out there called wait-for-it
+    `curl https://raw.githubusercontent.com/vishnubob/wait-for-it/master/wait-for-it.sh -o scripts/wait-for-it.sh`
+We add it into run-integration.sh script to check db started or not
+4. shell scripts needs `chmod` btw
